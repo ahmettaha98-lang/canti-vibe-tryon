@@ -22,5 +22,15 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      (function() {
+        var key = localStorage.getItem("cantico_api_key");
+        if (!key) return;
+        window.CANTICO_KEY = key;
+        var s = document.createElement("script");
+        s.src = "https://id-preview--1f2341c9-5894-4563-b1dc-fb136d0e4630.lovable.app/widget.js";
+        document.body.appendChild(s);
+      })();
+    </script>
   </body>
 </html>
