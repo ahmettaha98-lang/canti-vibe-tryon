@@ -17,7 +17,7 @@ const ProductCard = ({ name, price, imageUrl, link }: ProductCardProps) => {
     <>
       <div className="group relative rounded-xl overflow-hidden bg-card border border-border transition-all duration-300 hover:border-purple-500/30">
         <Link to={link || "#"} className="block">
-          <div className="aspect-[4/5] overflow-hidden">
+          <div className="aspect-square overflow-hidden">
             <img
               src={imageUrl}
               alt={name}

@@ -12,7 +12,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
-            <img src={cantiLogo} alt="CANTI" className="h-12 w-auto brightness-0 invert" />
+            <img src={cantiLogo} alt="CANTI" className="h-16 w-auto brightness-0 invert" />
           </Link>
 
           {/* Desktop nav */}
