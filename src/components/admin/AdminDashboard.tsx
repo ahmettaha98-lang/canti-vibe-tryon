@@ -1,11 +1,22 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ShoppingCart, Users, Package, TrendingUp } from "lucide-react";
+import { FlaskConical, TrendingUp, Zap, DollarSign } from "lucide-react";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 const metrics = [
-  { label: "Toplam Sipariş", value: "1.284", icon: ShoppingCart, change: "+12%" },
-  { label: "Aktif Müşteri", value: "3.752", icon: Users, change: "+8%" },
-  { label: "Ürün Sayısı", value: "48", icon: Package, change: "+2" },
-  { label: "Aylık Gelir", value: "₺186.400", icon: TrendingUp, change: "+23%" },
+  { label: "Bu Ay Deneme", value: "2.847", icon: FlaskConical, change: "+18%" },
+  { label: "Dönüşüm Oranı", value: "%12.4", icon: TrendingUp, change: "+2.1%" },
+  { label: "Aktif Widget", value: "3", icon: Zap, change: "Stabil" },
+  { label: "Toplam Gelir", value: "₺48.600", icon: DollarSign, change: "+23%" },
+];
+
+const usageData = [
+  { day: "Pzt", deneme: 380 },
+  { day: "Sal", deneme: 420 },
+  { day: "Çar", deneme: 510 },
+  { day: "Per", deneme: 390 },
+  { day: "Cum", deneme: 620 },
+  { day: "Cmt", deneme: 580 },
+  { day: "Paz", deneme: 450 },
 ];
 
 const AdminDashboard = () => {
@@ -22,7 +33,7 @@ const AdminDashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{m.value}</div>
-              <p className="text-xs text-green-500 mt-1">{m.change} bu ay</p>
+              <p className="text-xs text-green-500 mt-1">{m.change}</p>
             </CardContent>
           </Card>
         ))}
@@ -30,33 +41,20 @@ const AdminDashboard = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Son Siparişler</CardTitle>
+          <CardTitle className="text-base">Son 7 Gün — Widget Kullanımı</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-3">
-            {[
-              { id: "#1284", customer: "Ahmet Y.", product: "Adidas Eşofman", amount: "₺1.400", status: "Tamamlandı" },
-              { id: "#1283", customer: "Elif K.", product: "Şalvar Elbise", amount: "₺899", status: "Kargoda" },
-              { id: "#1282", customer: "Mehmet S.", product: "Örgü Süveter", amount: "₺700", status: "Hazırlanıyor" },
-              { id: "#1281", customer: "Zeynep A.", product: "Kemerli Çan Etek", amount: "₺649", status: "Tamamlandı" },
-            ].map((order) => (
-              <div key={order.id} className="flex items-center justify-between py-2 border-b border-border last:border-0">
-                <div className="flex items-center gap-4">
-                  <span className="text-sm font-mono text-muted-foreground">{order.id}</span>
-                  <div>
-                    <p className="text-sm font-medium">{order.customer}</p>
-                    <p className="text-xs text-muted-foreground">{order.product}</p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm font-medium">{order.amount}</p>
-                  <p className={`text-xs ${order.status === "Tamamlandı" ? "text-green-500" : order.status === "Kargoda" ? "text-blue-400" : "text-yellow-500"}`}>
-                    {order.status}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ResponsiveContainer width="100%" height={260}>
+            <LineChart data={usageData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(0 0% 18%)" />
+              <XAxis dataKey="day" stroke="hsl(0 0% 65%)" fontSize={12} />
+              <YAxis stroke="hsl(0 0% 65%)" fontSize={12} />
+              <Tooltip
+                contentStyle={{ background: "hsl(0 0% 10%)", border: "1px solid hsl(0 0% 18%)", borderRadius: 8, color: "#fff" }}
+              />
+              <Line type="monotone" dataKey="deneme" stroke="hsl(270 70% 50%)" strokeWidth={2} dot={{ r: 4, fill: "hsl(270 70% 50%)" }} />
+            </LineChart>
+          </ResponsiveContainer>
         </CardContent>
       </Card>
     </div>

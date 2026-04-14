@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import AdminDashboard from "@/components/admin/AdminDashboard";
-import AdminIntegrations from "@/components/admin/AdminIntegrations";
+import AdminStats from "@/components/admin/AdminStats";
 import AdminSettings from "@/components/admin/AdminSettings";
 
 const AdminPage = () => {
@@ -18,7 +18,7 @@ const AdminPage = () => {
           <main className="flex-1 p-6 overflow-auto">
             <Routes>
               <Route path="/" element={<AdminDashboard />} />
-              <Route path="/integrations" element={<AdminIntegrations />} />
+              <Route path="/stats" element={<AdminStats />} />
               <Route path="/settings" element={<AdminSettings />} />
               <Route path="*" element={<Navigate to="/admin" replace />} />
             </Routes>
