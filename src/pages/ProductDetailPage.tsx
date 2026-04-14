@@ -101,7 +101,7 @@ const ProductDetailPage = () => {
           {/* Left — Images */}
           <div>
             <div className="aspect-[4/5] rounded-xl overflow-hidden border border-border">
-              <img src={currentImage} alt={product.name} className="w-full h-full object-cover" />
+              <img src={currentImage} alt={product.name} data-cantico-image className="w-full h-full object-cover" />
             </div>
             {product.images.length > 1 && (
               <div className="flex gap-3 mt-4">
