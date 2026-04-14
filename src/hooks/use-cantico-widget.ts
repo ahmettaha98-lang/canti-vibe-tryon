@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 declare global {
   interface Window {
@@ -13,6 +13,18 @@ const IMAGE_SELECTOR = "[data-cantico-image]";
 const BUTTON_SELECTOR = ".cantico-btn";
 const OVERLAY_SELECTOR = ".cantico-overlay";
 
+const getImageSignature = (images: NodeListOf<Element>) => {
+  const sources = Array.from(images).map((image) => {
+    if (!(image instanceof HTMLImageElement)) {
+      return "";
+    }
+
+    return image.currentSrc || image.getAttribute("src") || "";
+  });
+
+  return [window.location.pathname, window.location.search, ...sources].join("|");
+};
+
 const cleanupCanticoArtifacts = () => {
   document.querySelectorAll(SCRIPT_SELECTOR).forEach((element) => element.remove());
   document.querySelectorAll(`${BUTTON_SELECTOR}, ${OVERLAY_SELECTOR}`).forEach((element) => element.remove());
@@ -26,7 +38,7 @@ const cleanupCanticoArtifacts = () => {
   });
 };
 
-const shouldRefreshWidget = () => {
+const shouldRefreshWidget = (signature: string, lastMountedSignature: string | null, lastKey: string | null, key: string) => {
   const images = document.querySelectorAll(IMAGE_SELECTOR);
 
   if (!images.length) {
@@ -34,10 +46,13 @@ const shouldRefreshWidget = () => {
   }
 
   const buttons = document.querySelectorAll(BUTTON_SELECTOR);
-  return buttons.length !== images.length;
+  return signature !== lastMountedSignature || key !== lastKey || buttons.length !== images.length;
 };
 
 export function useCanticoWidget() {
+  const lastMountedSignatureRef = useRef<string | null>(null);
+  const lastKeyRef = useRef<string | null>(null);
+
   useEffect(() => {
     let frameId: number | null = null;
 
@@ -52,26 +67,33 @@ export function useCanticoWidget() {
         if (!key) {
           cleanupCanticoArtifacts();
           window.CANTICO_KEY = undefined;
+          lastMountedSignatureRef.current = null;
+          lastKeyRef.current = null;
           frameId = null;
           return;
         }
 
         window.CANTICO_KEY = key;
 
-        const hasImages = document.querySelector(IMAGE_SELECTOR);
-        if (!hasImages) {
+        const images = document.querySelectorAll(IMAGE_SELECTOR);
+        if (!images.length) {
           cleanupCanticoArtifacts();
+          lastMountedSignatureRef.current = null;
           frameId = null;
           return;
         }
 
-        if (!shouldRefreshWidget() || window.__canticoWidgetLoading) {
+        const signature = getImageSignature(images);
+
+        if (!shouldRefreshWidget(signature, lastMountedSignatureRef.current, lastKeyRef.current, key) || window.__canticoWidgetLoading) {
           frameId = null;
           return;
         }
 
         cleanupCanticoArtifacts();
         window.__canticoWidgetLoading = true;
+        lastMountedSignatureRef.current = signature;
+        lastKeyRef.current = key;
 
         const script = document.createElement("script");
         script.src = WIDGET_SRC;
@@ -79,12 +101,19 @@ export function useCanticoWidget() {
         script.onload = () => {
           window.__canticoWidgetLoading = false;
 
-          if (shouldRefreshWidget()) {
-            scheduleWidgetMount();
-          }
+          requestAnimationFrame(() => {
+            const currentImages = document.querySelectorAll(IMAGE_SELECTOR);
+            const currentSignature = getImageSignature(currentImages);
+
+            if (shouldRefreshWidget(currentSignature, lastMountedSignatureRef.current, lastKeyRef.current, key)) {
+              lastMountedSignatureRef.current = null;
+              scheduleWidgetMount();
+            }
+          });
         };
         script.onerror = () => {
           window.__canticoWidgetLoading = false;
+          lastMountedSignatureRef.current = null;
         };
 
         document.body.appendChild(script);
@@ -93,9 +122,7 @@ export function useCanticoWidget() {
     };
 
     const observer = new MutationObserver(() => {
-      if (!document.querySelector(OVERLAY_SELECTOR)) {
-        scheduleWidgetMount();
-      }
+      scheduleWidgetMount();
     });
 
     scheduleWidgetMount();
@@ -107,6 +134,8 @@ export function useCanticoWidget() {
       }
 
       observer.disconnect();
+      lastMountedSignatureRef.current = null;
+      lastKeyRef.current = null;
       window.__canticoWidgetLoading = false;
     };
   }, []);
