@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Star, ShoppingCart } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -88,8 +88,12 @@ const ProductDetailPage = () => {
   const product = productsData[slug || ""] || fallback;
 
   const [selectedSize, setSelectedSize] = useState("M");
-  
   const [currentImage, setCurrentImage] = useState(product.images[0]);
+
+  useEffect(() => {
+    setSelectedSize("M");
+    setCurrentImage(product.images[0]);
+  }, [product]);
 
   return (
     <div className="min-h-screen">
