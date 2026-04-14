@@ -48,7 +48,7 @@ const productsData: Record<string, ProductData> = {
     name: "Ertuğrul Kıyafeti",
     brand: "CANTI STUDIO",
     price: "₺45.000",
-    description: "Orijinaline sadık kalınarak birinci sınıf gerçek kuzu, koyun, keçi ve dana derileri ile kürkleri kullanılarak üretilmiştir. Dizi, sinema, tiyatro ve dönem etkinlikleri için profesyonel düzeyde tasarlanmıştır.",
+    description: "Osmanlı'nın Doğuşuna Şahitlik Eden Zırh — Tarihi Doku, Usta İşçilik. Bu eşsiz zırh, orijinaline sadık kalınarak birinci sınıf gerçek kuzu, koyun, keçi ve dana derileri ile kürkleri kullanılarak üretilmiştir. Her detay, usta el işçiliğiyle özenle işlenmiş ve dikilmiştir. Zırhın iç kısmında giyilen kaftan, kumaşı rahat ve nefes alabilen bir yapıya sahiptir. Dizi, sinema, tiyatro ve dönem etkinlikleri için profesyonel düzeyde tasarlanmıştır. M, L ve XL bedenlere uygundur. Özel ölçüler için bizimle iletişime geçebilirsiniz.",
     images: [ertugrul1, ertugrul2, ertugrul3],
     rating: 5.0,
     reviewCount: 42,
