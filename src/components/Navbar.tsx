@@ -1,17 +1,43 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ShoppingCart, User, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import cantiLogo from "@/assets/canti-logo.png";
+
+const LOGO_MAX = 160; // px – big hero size
+const LOGO_MIN = 96;  // px – current navbar size (h-24)
+const SHRINK_DISTANCE = 120; // scroll px over which shrink happens
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === "/" || location.pathname === "/products";
+  const [logoSize, setLogoSize] = useState(isHome ? LOGO_MAX : LOGO_MIN);
+
+  useEffect(() => {
+    if (!isHome) {
+      setLogoSize(LOGO_MIN);
+      return;
+    }
+    const onScroll = () => {
+      const t = Math.min(window.scrollY / SHRINK_DISTANCE, 1);
+      setLogoSize(LOGO_MAX - t * (LOGO_MAX - LOGO_MIN));
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
 
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm">
       {/* Logo row */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center py-3">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center py-3 transition-all duration-100">
         <Link to="/">
-          <img src={cantiLogo} alt="CANTI" className="h-24 w-auto brightness-0 invert" />
+          <img
+            src={cantiLogo}
+            alt="CANTI"
+            className="w-auto brightness-0 invert transition-all duration-100"
+            style={{ height: `${logoSize}px` }}
+          />
         </Link>
       </div>
 
