@@ -6,30 +6,26 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import ProductsPage from "./pages/ProductsPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import NotFound from "./pages/NotFound";
-import { useCanticoWidget } from "./hooks/use-cantico-widget";
+import AdminPage from "./pages/AdminPage";
+import { CustomCodeProvider } from "./hooks/use-custom-code";
 
 const queryClient = new QueryClient();
-
-const AppContent = () => {
-  useCanticoWidget();
-
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<ProductsPage />} />
-        <Route path="/product/:slug" element={<ProductDetailPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  );
-};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <AppContent />
+      <CustomCodeProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<ProductsPage />} />
+            <Route path="/product/:slug" element={<ProductDetailPage />} />
+            <Route path="/admin/*" element={<AdminPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </CustomCodeProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
