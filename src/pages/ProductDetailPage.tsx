@@ -11,7 +11,7 @@ import ertugrul2 from "@/assets/product-5.png";
 import ertugrul3 from "@/assets/product-6.png";
 import etek from "@/assets/product-7.png";
 import orgu from "@/assets/product-8.png";
-import nike from "@/assets/product-9.png";
+import vintage from "@/assets/product-10.png";
 
 const sizes = ["XS", "S", "M", "L", "XL"];
 
