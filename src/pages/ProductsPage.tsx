@@ -5,7 +5,7 @@ import product3 from "@/assets/product-3.png";
 import product4 from "@/assets/product-4.png";
 import product7 from "@/assets/product-7.png";
 import product8 from "@/assets/product-8.png";
-import product9 from "@/assets/product-9.png";
+import product10 from "@/assets/product-10.png";
 
 const products = [
   { name: "Adidas Eşofman Takımı", price: "₺1.400", image: product1, slug: "adidas-esofman" },
@@ -13,7 +13,7 @@ const products = [
   { name: "Ertuğrul Kıyafeti", price: "₺45.000", image: product4, slug: "ertugrul-kiyafeti" },
   { name: "Kemerli Çan Etek", price: "₺649", image: product7, slug: "kemerli-etek" },
   { name: "Örgü Süveter", price: "₺700", image: product8, slug: "orgu-suveter" },
-  { name: "Nike Spor Ayakkabı", price: "₺499", image: product9, slug: "nike-ayakkabi" },
+  { name: "Vintage Elbise", price: "₺850", image: product10, slug: "vintage-elbise" },
 ];
 
 const ProductsPage = () => {
