@@ -1,4 +1,4 @@
-import { LayoutDashboard, Puzzle, Settings, Store } from "lucide-react";
+import { LayoutDashboard, BarChart3, Settings, Store } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation, Link } from "react-router-dom";
 import {
@@ -15,7 +15,7 @@ import {
 
 const items = [
   { title: "Dashboard", url: "/admin", icon: LayoutDashboard },
-  { title: "Entegrasyonlar", url: "/admin/integrations", icon: Puzzle },
+  { title: "İstatistikler", url: "/admin/stats", icon: BarChart3 },
   { title: "Ayarlar", url: "/admin/settings", icon: Settings },
 ];
 
@@ -23,13 +23,10 @@ export function AdminSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const location = useLocation();
-  const _isActive = (path: string) =>
-    path === "/admin" ? location.pathname === "/admin" : location.pathname.startsWith(path);
 
   return (
     <Sidebar collapsible="icon">
       <SidebarContent>
-        {/* Logo / Store link */}
         <div className="p-4 border-b border-sidebar-border">
           <Link to="/" className="flex items-center gap-2 text-sidebar-foreground hover:text-foreground transition-colors">
             <Store className="h-5 w-5 shrink-0" />
