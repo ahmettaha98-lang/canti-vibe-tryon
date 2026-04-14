@@ -26,15 +26,5 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script>
-      (function() {
-        var key = localStorage.getItem("cantico_api_key");
-        if (!key) return;
-        window.CANTICO_KEY = key;
-        var s = document.createElement("script");
-        s.src = "https://look-on-live.lovable.app/widget.js";
-        document.body.appendChild(s);
-      })();
-    </script>
   </body>
 </html>
