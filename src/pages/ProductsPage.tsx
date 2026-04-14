@@ -2,12 +2,12 @@ import Navbar from "@/components/Navbar";
 import ProductCard from "@/components/ProductCard";
 
 const products = [
-  { name: "Oversize Acid Wash Tişört", price: "₺649", image: "https://placehold.co/400x500/1a1a1a/ffffff?text=CANTI+1", keyword: "tshirt" },
-  { name: "Street Hoodie", price: "₺899", image: "https://placehold.co/400x500/1a1a1a/ffffff?text=CANTI+2", keyword: "hoodie" },
-  { name: "Cargo Jogger", price: "₺749", image: "https://placehold.co/400x500/1a1a1a/ffffff?text=CANTI+3", keyword: "jogger" },
-  { name: "Denim Oversize Ceket", price: "₺1.199", image: "https://placehold.co/400x500/1a1a1a/ffffff?text=CANTI+4", keyword: "denim" },
-  { name: "Graphic Sweatshirt", price: "₺799", image: "https://placehold.co/400x500/1a1a1a/ffffff?text=CANTI+5", keyword: "sweatshirt" },
-  { name: "Utility Vest", price: "₺549", image: "https://placehold.co/400x500/1a1a1a/ffffff?text=CANTI+6", keyword: "vest" },
+  { name: "Oversize Acid Wash Tişört", price: "₺649", image: "https://placehold.co/500x500/1a1a1a/ffffff?text=CANTI+1", keyword: "tshirt" },
+  { name: "Street Hoodie", price: "₺899", image: "https://placehold.co/500x500/1a1a1a/ffffff?text=CANTI+2", keyword: "hoodie" },
+  { name: "Cargo Jogger", price: "₺749", image: "https://placehold.co/500x500/1a1a1a/ffffff?text=CANTI+3", keyword: "jogger" },
+  { name: "Denim Oversize Ceket", price: "₺1.199", image: "https://placehold.co/500x500/1a1a1a/ffffff?text=CANTI+4", keyword: "denim" },
+  { name: "Graphic Sweatshirt", price: "₺799", image: "https://placehold.co/500x500/1a1a1a/ffffff?text=CANTI+5", keyword: "sweatshirt" },
+  { name: "Utility Vest", price: "₺549", image: "https://placehold.co/500x500/1a1a1a/ffffff?text=CANTI+6", keyword: "vest" },
 ];
 
 const ProductsPage = () => {
