@@ -22,7 +22,7 @@ const items = [
 export function AdminSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
-  const location = useLocation();
+  
 
   return (
     <Sidebar collapsible="icon">
