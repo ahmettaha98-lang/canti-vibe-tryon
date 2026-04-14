@@ -1,13 +1,19 @@
 import Navbar from "@/components/Navbar";
 import ProductCard from "@/components/ProductCard";
+import product1 from "@/assets/product-1.png";
+import product2 from "@/assets/product-2.png";
+import product3 from "@/assets/product-3.png";
+import product4 from "@/assets/product-4.png";
+import product5 from "@/assets/product-5.png";
+import product6 from "@/assets/product-6.png";
 
 const products = [
-  { name: "Oversize Acid Wash Tişört", price: "₺649", image: "https://placehold.co/500x500/1a1a1a/ffffff?text=CANTI+1", keyword: "tshirt" },
-  { name: "Street Hoodie", price: "₺899", image: "https://placehold.co/500x500/1a1a1a/ffffff?text=CANTI+2", keyword: "hoodie" },
-  { name: "Cargo Jogger", price: "₺749", image: "https://placehold.co/500x500/1a1a1a/ffffff?text=CANTI+3", keyword: "jogger" },
-  { name: "Denim Oversize Ceket", price: "₺1.199", image: "https://placehold.co/500x500/1a1a1a/ffffff?text=CANTI+4", keyword: "denim" },
-  { name: "Graphic Sweatshirt", price: "₺799", image: "https://placehold.co/500x500/1a1a1a/ffffff?text=CANTI+5", keyword: "sweatshirt" },
-  { name: "Utility Vest", price: "₺549", image: "https://placehold.co/500x500/1a1a1a/ffffff?text=CANTI+6", keyword: "vest" },
+  { name: "Adidas Eşofman Takımı", price: "₺1.400", image: product1 },
+  { name: "Street Hoodie Set", price: "₺1.400", image: product2 },
+  { name: "Şalvar Elbise", price: "₺899", image: product3 },
+  { name: "Ertuğrul Kıyafeti", price: "₺45.000", image: product4 },
+  { name: "Tarihi Zırh - Arka", price: "₺45.000", image: product5 },
+  { name: "Tarihi Zırh - Kılıçlı", price: "₺45.000", image: product6 },
 ];
 
 const ProductsPage = () => {
