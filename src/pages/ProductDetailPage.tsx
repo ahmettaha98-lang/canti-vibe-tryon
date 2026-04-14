@@ -1,20 +1,67 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { Star, ShoppingCart, Sparkles } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import VirtualTryOnModal from "@/components/VirtualTryOnModal";
 
+import adidas1 from "@/assets/product-1.png";
+import adidas2 from "@/assets/product-2.png";
+import salvar from "@/assets/product-3.png";
+import ertugrul1 from "@/assets/product-4.png";
+import ertugrul2 from "@/assets/product-5.png";
+import ertugrul3 from "@/assets/product-6.png";
+
 const sizes = ["XS", "S", "M", "L", "XL"];
-const mainImage = "https://placehold.co/600x750/1a1a1a/ffffff?text=CANTI+OVERSIZE";
-const thumbnails = [
-  "https://placehold.co/150x180/1a1a1a/ffffff?text=1",
-  "https://placehold.co/150x180/1a1a1a/ffffff?text=2",
-  "https://placehold.co/150x180/1a1a1a/ffffff?text=3",
-];
+
+interface ProductData {
+  name: string;
+  brand: string;
+  price: string;
+  description: string;
+  images: string[];
+  rating: number;
+  reviewCount: number;
+}
+
+const productsData: Record<string, ProductData> = {
+  "adidas-esofman": {
+    name: "İthal Adidas Eşofman Takımı",
+    brand: "CANTI STUDIO",
+    price: "₺1.400",
+    description: "Adidas logolu, rahat kesim eşofman takımı. Günlük kullanım ve spor için ideal. Üst kalite kumaş, dayanıklı dikiş detayları.",
+    images: [adidas1, adidas2],
+    rating: 4.8,
+    reviewCount: 124,
+  },
+  "salvar-elbise": {
+    name: "Şalvar Elbise",
+    brand: "CANTI STUDIO",
+    price: "₺899",
+    description: "Yöresel motiflerle modern dokunuşun buluştuğu şık şalvar elbise. Özel günler ve davetler için mükemmel tercih.",
+    images: [salvar],
+    rating: 4.6,
+    reviewCount: 87,
+  },
+  "ertugrul-kiyafeti": {
+    name: "Ertuğrul Kıyafeti",
+    brand: "CANTI STUDIO",
+    price: "₺45.000",
+    description: "Orijinaline sadık kalınarak birinci sınıf gerçek kuzu, koyun, keçi ve dana derileri ile kürkleri kullanılarak üretilmiştir. Dizi, sinema, tiyatro ve dönem etkinlikleri için profesyonel düzeyde tasarlanmıştır.",
+    images: [ertugrul1, ertugrul2, ertugrul3],
+    rating: 5.0,
+    reviewCount: 42,
+  },
+};
+
+const fallback = productsData["adidas-esofman"];
 
 const ProductDetailPage = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const product = productsData[slug || ""] || fallback;
+
   const [selectedSize, setSelectedSize] = useState("M");
   const [tryOnOpen, setTryOnOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState(mainImage);
+  const [currentImage, setCurrentImage] = useState(product.images[0]);
 
   return (
     <div className="min-h-screen">
@@ -25,43 +72,42 @@ const ProductDetailPage = () => {
           {/* Left — Images */}
           <div>
             <div className="aspect-[4/5] rounded-xl overflow-hidden border border-border">
-              <img src={currentImage} alt="Ürün" className="w-full h-full object-cover" />
+              <img src={currentImage} alt={product.name} className="w-full h-full object-cover" />
             </div>
-            <div className="flex gap-3 mt-4">
-              {thumbnails.map((t, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentImage(t)}
-                  className="w-20 h-24 rounded-lg overflow-hidden border border-border hover:border-purple-500/50 transition-all duration-300"
-                >
-                  <img src={t} alt={`Thumbnail ${i + 1}`} className="w-full h-full object-cover" />
-                </button>
-              ))}
-            </div>
+            {product.images.length > 1 && (
+              <div className="flex gap-3 mt-4">
+                {product.images.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrentImage(img)}
+                    className={`w-20 h-24 rounded-lg overflow-hidden border transition-all duration-300 ${
+                      currentImage === img ? "border-purple-500" : "border-border hover:border-purple-500/50"
+                    }`}
+                  >
+                    <img src={img} alt={`Thumbnail ${i + 1}`} className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Right — Info */}
           <div className="flex flex-col justify-center">
-            <span className="text-xs font-semibold tracking-widest text-purple-400 mb-2">CANTI STUDIO</span>
-            <h1 className="text-3xl font-bold mb-2">Oversize Acid Wash Tişört</h1>
-            <p className="text-2xl font-bold text-purple-400 mb-4">₺649</p>
+            <span className="text-xs font-semibold tracking-widest text-purple-400 mb-2">{product.brand}</span>
+            <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
+            <p className="text-2xl font-bold text-purple-400 mb-4">{product.price}</p>
 
-            {/* Rating */}
             <div className="flex items-center gap-2 mb-4">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className={`h-4 w-4 ${i < 5 ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"}`} />
+                  <Star key={i} className={`h-4 w-4 ${i < Math.round(product.rating) ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"}`} />
                 ))}
               </div>
-              <span className="text-sm text-muted-foreground">4.8 (124 yorum)</span>
+              <span className="text-sm text-muted-foreground">{product.rating} ({product.reviewCount} yorum)</span>
             </div>
 
-            <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-              Acid wash işlemiyle benzersiz bir dokuya kavuşan bu oversize tişört, sokak modasının en cesur ifadesi.
-              %100 pamuk, rahat kesim ve CANTI'nin imza detaylarıyla fark yarat.
-            </p>
+            <p className="text-sm text-muted-foreground mb-6 leading-relaxed">{product.description}</p>
 
-            {/* Size selector */}
             <div className="mb-6">
               <p className="text-sm font-medium mb-3">Beden</p>
               <div className="flex gap-2">
@@ -81,7 +127,6 @@ const ProductDetailPage = () => {
               </div>
             </div>
 
-            {/* Buttons */}
             <div className="flex gap-3">
               <button className="flex-1 py-3.5 rounded-xl font-semibold text-sm bg-foreground text-background hover:opacity-90 flex items-center justify-center gap-2 transition-all duration-300">
                 <ShoppingCart className="h-4 w-4" />
@@ -102,7 +147,7 @@ const ProductDetailPage = () => {
       <VirtualTryOnModal
         isOpen={tryOnOpen}
         onClose={() => setTryOnOpen(false)}
-        productImageUrl={mainImage}
+        productImageUrl={currentImage}
       />
     </div>
   );
