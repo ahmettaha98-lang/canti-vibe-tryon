@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { Star, ShoppingCart, Sparkles } from "lucide-react";
+import { Star, ShoppingCart } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import VirtualTryOnModal from "@/components/VirtualTryOnModal";
 
 import adidas1 from "@/assets/product-1.png";
 import adidas2 from "@/assets/product-2.png";
@@ -89,7 +88,7 @@ const ProductDetailPage = () => {
   const product = productsData[slug || ""] || fallback;
 
   const [selectedSize, setSelectedSize] = useState("M");
-  const [tryOnOpen, setTryOnOpen] = useState(false);
+  
   const [currentImage, setCurrentImage] = useState(product.images[0]);
 
   return (
@@ -161,23 +160,11 @@ const ProductDetailPage = () => {
                 <ShoppingCart className="h-4 w-4" />
                 Sepete Ekle
               </button>
-              <button
-                onClick={() => setTryOnOpen(true)}
-                className="flex-1 py-3.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:opacity-90 flex items-center justify-center gap-2 transition-all duration-300"
-              >
-                <Sparkles className="h-4 w-4" />
-                Sanal Kabinde Dene
-              </button>
             </div>
           </div>
         </div>
       </section>
 
-      <VirtualTryOnModal
-        isOpen={tryOnOpen}
-        onClose={() => setTryOnOpen(false)}
-        productImageUrl={currentImage}
-      />
     </div>
   );
 };
