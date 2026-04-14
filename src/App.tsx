@@ -7,22 +7,31 @@ import ProductsPage from "./pages/ProductsPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import NotFound from "./pages/NotFound";
+import { useCanticoWidget } from "./hooks/use-cantico-widget";
 
 const queryClient = new QueryClient();
+
+const AppContent = () => {
+  useCanticoWidget();
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<ProductsPage />} />
+        <Route path="/product/:slug" element={<ProductDetailPage />} />
+        <Route path="/admin" element={<AdminDashboardPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<ProductsPage />} />
-          <Route path="/product/:slug" element={<ProductDetailPage />} />
-          <Route path="/admin" element={<AdminDashboardPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AppContent />
     </TooltipProvider>
   </QueryClientProvider>
 );
