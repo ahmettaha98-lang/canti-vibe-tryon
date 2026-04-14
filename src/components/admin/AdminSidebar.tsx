@@ -1,6 +1,6 @@
 import { LayoutDashboard, BarChart3, Settings, Store } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { useLocation, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
