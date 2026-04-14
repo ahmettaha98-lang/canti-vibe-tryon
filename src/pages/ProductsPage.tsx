@@ -37,7 +37,7 @@ const ProductsPage = () => {
               name={p.name}
               price={p.price}
               imageUrl={p.image}
-              link={i === 0 ? "/product/canti-oversize" : "#"}
+              link="/product/canti-oversize"
             />
           ))}
         </div>
