@@ -39,14 +39,7 @@ const cleanupCanticoArtifacts = () => {
 };
 
 const shouldRefreshWidget = (signature: string, lastMountedSignature: string | null, lastKey: string | null, key: string) => {
-  const images = document.querySelectorAll(IMAGE_SELECTOR);
-
-  if (!images.length) {
-    return false;
-  }
-
-  const buttons = document.querySelectorAll(BUTTON_SELECTOR);
-  return signature !== lastMountedSignature || key !== lastKey || buttons.length !== images.length;
+  return signature !== lastMountedSignature || key !== lastKey;
 };
 
 export function useCanticoWidget() {
@@ -103,10 +96,13 @@ export function useCanticoWidget() {
 
           requestAnimationFrame(() => {
             const currentImages = document.querySelectorAll(IMAGE_SELECTOR);
+            if (!currentImages.length) {
+              return;
+            }
+
             const currentSignature = getImageSignature(currentImages);
 
             if (shouldRefreshWidget(currentSignature, lastMountedSignatureRef.current, lastKeyRef.current, key)) {
-              lastMountedSignatureRef.current = null;
               scheduleWidgetMount();
             }
           });
