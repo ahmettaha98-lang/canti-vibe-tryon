@@ -5,7 +5,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import ProductsPage from "./pages/ProductsPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
-import AdminDashboardPage from "./pages/AdminDashboardPage";
 import NotFound from "./pages/NotFound";
 import { useCanticoWidget } from "./hooks/use-cantico-widget";
 
@@ -19,7 +18,6 @@ const AppContent = () => {
       <Routes>
         <Route path="/" element={<ProductsPage />} />
         <Route path="/product/:slug" element={<ProductDetailPage />} />
-        <Route path="/admin" element={<AdminDashboardPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
