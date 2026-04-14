@@ -10,6 +10,7 @@ import salvar from "@/assets/product-3.png";
 import ertugrul1 from "@/assets/product-4.png";
 import ertugrul2 from "@/assets/product-5.png";
 import ertugrul3 from "@/assets/product-6.png";
+import etek from "@/assets/product-7.png";
 
 const sizes = ["XS", "S", "M", "L", "XL"];
 
@@ -51,8 +52,16 @@ const productsData: Record<string, ProductData> = {
     rating: 5.0,
     reviewCount: 42,
   },
+  "kemerli-etek": {
+    name: "Kemerli Çan Etek",
+    brand: "CANTI STUDIO",
+    price: "₺649",
+    description: "İthal scuba krep kemerli çan kumaş etek. 38/48 beden arası, tüylenmeme garantili. 10 farklı renk seçeneği mevcuttur.",
+    images: [etek],
+    rating: 4.7,
+    reviewCount: 56,
+  },
 };
-
 const fallback = productsData["adidas-esofman"];
 
 const ProductDetailPage = () => {

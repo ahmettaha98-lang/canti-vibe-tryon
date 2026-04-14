@@ -3,11 +3,13 @@ import ProductCard from "@/components/ProductCard";
 import product1 from "@/assets/product-1.png";
 import product3 from "@/assets/product-3.png";
 import product4 from "@/assets/product-4.png";
+import product7 from "@/assets/product-7.png";
 
 const products = [
   { name: "Adidas Eşofman Takımı", price: "₺1.400", image: product1, slug: "adidas-esofman" },
   { name: "Şalvar Elbise", price: "₺899", image: product3, slug: "salvar-elbise" },
   { name: "Ertuğrul Kıyafeti", price: "₺45.000", image: product4, slug: "ertugrul-kiyafeti" },
+  { name: "Kemerli Çan Etek", price: "₺649", image: product7, slug: "kemerli-etek" },
 ];
 
 const ProductsPage = () => {
