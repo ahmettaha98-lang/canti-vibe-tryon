@@ -71,14 +71,14 @@ const productsData: Record<string, ProductData> = {
     rating: 4.9,
     reviewCount: 74,
   },
-  "nike-ayakkabi": {
-    name: "Nike Spor Ayakkabı",
+  "vintage-elbise": {
+    name: "Vintage Elbise",
     brand: "CANTI STUDIO",
-    price: "₺499",
-    description: "Siyah-beyaz Nike spor ayakkabı. Tüm numaralar mevcuttur. Şeffaf kargo güvencesiyle, 2-4 iş günü içinde teslim. Kapıda ödeme seçeneği mevcuttur.",
-    images: [nike],
-    rating: 4.8,
-    reviewCount: 93,
+    price: "₺850",
+    description: "Kırmızı kareli vintage elbise. Beyaz gömlek detayıyla retro şıklığı modern çizgilerle buluşturan özel tasarım. Günlük ve özel günler için ideal.",
+    images: [vintage],
+    rating: 4.7,
+    reviewCount: 63,
   },
 };
 const fallback = productsData["adidas-esofman"];
